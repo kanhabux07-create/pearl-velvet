@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OUR STORY — A Book of Memories</title>
+  <link rel="stylesheet" href="combined.css" />
+</head>
+<body>
+  <!-- Custom cursor placeholder -->
+  <div id="custom-cursor"></div>
+
+  <!-- Landing Screen -->
+  <section id="landing" class="screen active">
+    <canvas id="landing-canvas"></canvas>
+    <div class="center-content">
+      <h1 class="title">OUR STORY</h1>
+      <p class="subtitle">A collection of little moments that became memories.</p>
+      <button id="enter-btn" class="magnetic-btn">ENTER OUR STORY ✦</button>
+    </div>
+  </section>
+
+  <!-- Main app container (hidden initially) -->
+  <div id="app" class="hidden">
+    <!-- Navigation -->
+    <nav id="nav-bar">
+      <ul>
+        <li><a href="#" data-section="book" class="nav-link active">BOOK</a></li>
+        <li><a href="#" data-section="timeline" class="nav-link">TIMELINE</a></li>
+        <li><a href="#" data-section="memories" class="nav-link">MEMORIES</a></li>
+        <li><a href="#" data-section="game" class="nav-link">GAME</a></li>
+        <li><a href="#" data-section="secret" class="nav-link">SECRET</a></li>
+      </ul>
+      <div id="progress-indicator">MEMORY 01 / 10</div>
+      <div id="audio-control" class="icon-btn">🔊</div>
+    </nav>
+
+    <!-- Sections -->
+    <section id="section-book" class="app-section active">
+      <div id="book-canvas-container"></div>
+      <div id="page-overlay" class="page-overlay hidden"></div>
+    </section>
+
+    <section id="section-timeline" class="app-section hidden">
+      <div id="timeline-container"></div>
+    </section>
+
+    <section id="section-memories" class="app-section hidden">
+      <div id="memory-collection" class="grid"></div>
+    </section>
+
+    <section id="section-game" class="app-section hidden">
+      <canvas id="game-canvas"></canvas>
+      <div id="game-ui" class="overlay-ui hidden">
+        <div id="game-score">Score: 0</div>
+        <button id="game-restart" class="magnetic-btn">RESTART</button>
+      </div>
+    </section>
+
+    <section id="section-secret" class="app-section hidden">
+      <div id="secret-lock" class="center">
+        <h2>🔒 SECRET MEMORY</h2>
+        <p>This page is waiting for you.</p>
+      </div>
+      <div id="secret-content" class="center hidden">
+        <h2 id="secret-title"></h2>
+        <img id="secret-image" src="" alt="Secret" />
+        <p id="secret-story"></p>
+        <p id="secret-caption" class="caption"></p>
+      </div>
+    </section>
+  </div>
+
+  <script src="combined.js"></script>
+</body>
+</html>
