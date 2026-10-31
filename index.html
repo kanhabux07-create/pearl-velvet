@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>OUR STORY — A Book of Memories</title>
+  
+  <!-- Romantic & Editorial Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-night">
+
+  <!-- Custom Romantic Cursor -->
+  <div id="custom-cursor" class="custom-cursor" aria-hidden="true"></div>
+  <div id="cursor-follower" class="cursor-follower" aria-hidden="true"></div>
+
+  <!-- Ambient 3D Starfield & Particle Atmosphere -->
+  <canvas id="sky-canvas" class="sky-canvas"></canvas>
+  <div class="vignette-overlay" aria-hidden="true"></div>
+
+  <!-- Ambient Audio Controls -->
+  <aside class="audio-widget" id="audio-widget" aria-label="Music and Sound Controls">
+    <button class="audio-btn" id="audio-toggle-btn" title="Toggle Romantic Ambient Music" aria-label="Toggle Romantic Music">
+      <span class="audio-icon-sound" id="audio-icon-playing">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+          <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        </svg>
+      </span>
+      <span class="audio-waves" id="audio-waves">
+        <span></span><span></span><span></span><span></span>
+      </span>
+    </button>
+    <div class="audio-popover" id="audio-popover">
+      <div class="audio-title" id="music-track-title">Ambient Melody: Starlight &amp; Rain</div>
+      <div class="audio-controls-row">
+        <label for="volume-slider" class="sr-only">Volume</label>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.5" aria-label="Volume">
+        <button id="sfx-toggle-btn" class="sfx-btn active" title="Toggle Sound Effects">SFX ON</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Performance & Quality Switcher -->
+  <div class="quality-badge" id="quality-badge" title="Performance Mode">
+    <span class="quality-label">QUALITY:</span>
+    <button class="quality-btn active" data-quality="high">HIGH</button>
+    <button class="quality-btn" data-quality="med">MED</button>
+    <button class="quality-btn" data-quality="low">LOW</button>
+  </div>
+
+  <!-- Primary Floating Navigation Bar -->
+  <header class="main-header" id="main-header">
+    <div class="nav-brand" id="nav-brand" data-target="landing-section">
+      <span class="brand-monogram" id="brand-monogram">M &amp; L</span>
+      <span class="brand-divider">✦</span>
+      <span class="brand-title">OUR STORY</span>
+    </div>
+
+    <nav class="nav-links" id="nav-links" aria-label="Site Navigation">
+      <button class="nav-item active" data-section="book-section">
+        <span class="nav-dot"></span>THE BOOK
+      </button>
+      <button class="nav-item" data-section="timeline-section">
+        <span class="nav-dot"></span>TIMELINE
+      </button>
+      <button class="nav-item" data-section="memories-section">
+        <span class="nav-dot"></span>LITTLE THINGS
+      </button>
+      <button class="nav-item" data-section="game-section">
+        <span class="nav-dot"></span>MINI-GAME
+      </button>
+      <button class="nav-item" data-section="secret-section">
+        <span class="nav-dot"></span>SECRET VAULT <span class="lock-indicator" id="nav-lock-status">🔒</span>
+      </button>
+      <button class="nav-item" data-section="quiz-section">
+        <span class="nav-dot"></span>COUPLE QUIZ
+      </button>
+    </nav>
+
+    <div class="nav-counter" id="nav-counter">
+      <span class="counter-label">MEMORY</span>
+      <span class="counter-val" id="counter-current">01</span>
+      <span class="counter-sep">/</span>
+      <span class="counter-total" id="counter-total">10</span>
+    </div>
+  </header>
+
+  <!-- MAIN EXPERIENCE CONTAINER -->
+  <main id="app-container">
+
+    <!-- ====================================================
+         SECTION 1: CINEMATIC LANDING SCREEN
+         ==================================================== -->
+    <section class="screen-section active-screen" id="landing-section">
+      <div class="landing-content">
+        <div class="landing-crest">
+          <svg class="crest-svg" viewBox="0 0 100 100" width="80" height="80">
+            <path d="M50 82 S20 54 20 32 A16 16 0 0 1 50 25 A16 16 0 0 1 80 32 S80 54 50 82 Z" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+            <circle cx="50" cy="50" r="3" fill="#e5c18b" />
+            <defs>
+              <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffd599" />
+                <stop offset="50%" stop-color="#d4af37" />
+                <stop offset="100%" stop-color="#aa7c11" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <div class="landing-badge">A PRIVATE DIGITAL MEMORY ARCHIVE</div>
+        
+        <h1 class="landing-title" id="landing-title">OUR STORY</h1>
+        
+        <p class="landing-subtitle" id="landing-subtitle">
+          A collection of little moments that became our forever.
+        </p>
+
+        <div class="couple-names-banner" id="couple-names-banner">
+          <span class="couple-p1" id="landing-p1">Kanha</span>
+          <span class="couple-amp">&amp;</span>
+          <span class="couple-p2" id="landing-p2">Akkanksha🫣</span>
+        </div>
+
+        <p class="landing-quote" id="landing-quote">
+          “In a universe of billions, my eyes will always search for you❤️.”
+        </p>
+
+        <button class="cta-enter-btn magnetic-btn" id="enter-btn">
+          <span class="btn-glow"></span>
+          <span class="btn-content">
+            <span class="btn-text">let's explore it✨💍</span>
+            <span class="btn-icon">✦</span>
+          </span>
+        </button>
+
+        <div class="landing-hint">
+                   <span class="hint-sound">♫ Click to start with romantic ambient melody</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 2: 3D INTERACTIVE MEMORY BOOK
+         ==================================================== -->
+    <section class="screen-section" id="book-section">
+      <div class="book-header-banner">
+        <span class="section-tag">CHAPTER 01</span>
+        <h2 class="section-title">The Book of Us</h2>
+        <p class="section-sub">Turn the pages, hold the moments, keep them forever.</p>
+      </div>
+
+      <!-- 3D BOOK STAGE -->
+      <div class="book-stage" id="book-stage">
+        <div class="book-perspective-wrapper" id="book-perspective">
+          <div class="book-container" id="book-container">
+            
+            <!-- Realistic Book Spine & Edge Layers -->
+            <div class="book-spine" id="book-spine"></div>
+            <div class="book-edge-top"></div>
+            <div class="book-edge-right"></div>
+            <div class="book-edge-bottom"></div>
+            
+            <!-- Book Cover Front (Page 0) -->
+            <div class="book-page book-cover book-cover-front" id="book-cover-front">
+              <div class="cover-filigree-frame"></div>
+              <div class="cover-content">
+                <div class="cover-crest">✦ ❦ ✦</div>
+                <h2 class="cover-title" id="cover-title">OUR STORY</h2>
+                <div class="cover-divider"></div>
+                <p class="cover-subtitle" id="cover-subtitle">A Book of Memories</p>
+                <div class="cover-couple" id="cover-couple">Kanha &amp; Akkanksha</div>
+                <div class="cover-date" id="cover-date">9 june 2025</div>
+                <div class="cover-action-hint">Click next page to open ➔</div>
+              </div>
+            </div>
+
+            <!-- DYNAMIC SPREAD PAGES (Injected & Controlled via app.js) -->
+            <div class="book-spread" id="book-spread">
+              
+              <!-- LEFT PAGE: Photograph Area -->
+              <div class="page-side page-left" id="page-left">
+                <div class="page-texture"></div>
+                <div class="page-margin-line"></div>
+                <div class="page-filigree-corner top-left"></div>
+                
+                <div class="photo-card-wrapper" id="photo-card-wrapper">
+                  <div class="tape-corner tape-tl"></div>
+                  <div class="tape-corner tape-tr"></div>
+                  
+                  <div class="photo-frame" id="photo-frame">
+                    <img src="" alt="Memory Photo" class="memory-img" id="current-memory-img">
+                    <div class="photo-overlay-shine"></div>
+                    <button class="photo-zoom-btn" id="photo-zoom-btn" title="Click to enlarge photo">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        <line x1="11" y1="8" x2="11" y2="14"/>
+                        <line x1="8" y1="11" x2="14" y2="11"/>
+                      </svg>
+                    </button>
+                  </div>
+                  
+                  <div class="photo-caption-tag" id="current-photo-caption">
+                    “A moment frozen in golden light.”
+                  </div>
+                </div>
+
+                <div class="page-footer-left">
+                  <span class="left-page-num" id="left-page-num">02</span>
+                </div>
+              </div>
+
+              <!-- RIGHT PAGE: Story & Details -->
+              <div class="page-side page-right" id="page-right">
+                <div class="page-texture"></div>
+                <div class="page-margin-line right"></div>
+                <div class="page-filigree-corner top-right"></div>
+                
+                <div class="page-story-content">
+                  <div class="story-meta-header">
+                    <span class="story-stamp" id="current-memory-stamp">MEMOIRE № 01</span>
+                    <span class="story-date" id="current-memory-date">9 june</span>
+                  </div>
+
+                  <h3 class="story-title" id="current-memory-title">Our First Memory</h3>
+
+                  <div class="story-divider-ornament">
+                    <span>❧</span> <span class="ornament-line"></span> <span>❦</span> <span class="ornament-line"></span> <span>☙</span>
+                  </div>
+
+                  <div class="story-body-text" id="current-memory-story">
+                    This was one of those little moments that became a big memory. I still remember the way the world went quiet around us, and how effortlessly we talked until the cafe closed.
+                  </div>
+
+                  <!-- Boyfriend's Secret Note / Little Detail -->
+                  <div class="boyfriend-note-box">
+                    <div class="note-pin"></div>
+                    <span class="note-label">The Little Thing I Loved:</span>
+                    <p class="note-text" id="current-memory-bfnote">
+                      The way you kept smiling into your cup whenever our eyes met across the table.
+                    </p>
+                  </div>
+
+                  <!-- Romantic Floral / Star Accent SVG -->
+                  <div class="page-doodle-accent">
+                    <svg viewBox="0 0 120 40" width="100" height="30" class="doodle-svg">
+                      <path d="M10 20 Q 35 5, 60 20 T 110 20" fill="none" stroke="#d4af37" stroke-width="1.2" stroke-dasharray="2,2"/>
+                      <circle cx="60" cy="20" r="3" fill="#e88b9e" />
+                      <circle cx="30" cy="14" r="1.5" fill="#d4af37" />
+                      <circle cx="90" cy="14" r="1.5" fill="#d4af37" />
+                    </svg>
+                  </div>
+
+                  <div class="page-footer-right">
+                    <span class="right-page-num" id="right-page-num">03</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Page Turning Animated Overlay (for dynamic 3D leaf flip) -->
+            <div class="turning-leaf" id="turning-leaf">
+              <div class="leaf-face leaf-front" id="leaf-front"></div>
+              <div class="leaf-face leaf-back" id="leaf-back"></div>
+              <div class="leaf-shadow" id="leaf-shadow"></div>
+            </div>
+
+            <!-- Book Back Cover -->
+            <div class="book-page book-cover book-cover-back" id="book-cover-back">
+              <div class="cover-content">
+                <div class="back-heart">❦</div>
+                <h3 class="back-title">To Be Continued...</h3>
+                <p class="back-text">Every second with you is my favorite story, and we are only on chapter one.</p>
+                <div class="back-forever">FOREVER &amp; ALWAYS</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Book Interactive Controls Bar -->
+      <div class="book-controls-bar">
+        <button class="book-nav-btn prev-btn magnetic-btn" id="book-prev-btn" aria-label="Previous Memory Page">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+          <span class="btn-label">PREV</span>
+        </button>
+
+        <!-- Interactive Memory Scrubber Dots -->
+        <div class="scrubber-track" id="scrubber-track" role="tablist" aria-label="Memory Pages">
+          <!-- Dots injected via JS -->
+        </div>
+
+        <button class="book-nav-btn next-btn magnetic-btn" id="book-next-btn" aria-label="Next Memory Page">
+          <span class="btn-label">NEXT</span>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="book-footer-tips">
+        <span>Use <strong>←</strong> / <strong>→</strong> Arrow Keys</span>
+        <span>•</span>
+        <span>Drag or Swipe Page Edge</span>
+        <span>•</span>
+        <span>Click Photo to Enlarge</span>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 3: MEMORY TIMELINE
+         ==================================================== -->
+    <section class="screen-section" id="timeline-section">
+      <div class="section-header">
+        <span class="section-tag">CHRONOLOGICAL PATH</span>
+        <h2 class="section-title">The Path of Our Love</h2>
+        <p class="section-sub">From the very first hello to the life we are building together.</p>
+      </div>
+
+      <div class="timeline-container" id="timeline-container">
+        <!-- Glowing Constellation Spine -->
+        <div class="timeline-spine">
+          <div class="timeline-spine-glow"></div>
+        </div>
+
+        <div class="timeline-cards-wrapper" id="timeline-cards-wrapper">
+          <!-- Timeline items injected dynamically via app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 4: LITTLE THINGS I REMEMBER
+         ==================================================== -->
+    <section class="screen-section" id="memories-section">
+      <div class="section-header">
+        <span class="section-tag">THE SWEETEST DETAILS</span>
+        <h2 class="section-title">Little Things I Remember</h2>
+        <p class="section-sub">Because it was never just the big dates; it was the quiet, lovely little seconds that made me fall for you.</p>
+      </div>
+
+      <div class="little-things-grid" id="little-things-grid">
+        <!-- 8 Interactive 3D Micro-Cards injected dynamically via app.js -->
+      </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 5: MINI-GAME: COLLECT OUR MEMORIES
+         ==================================================== -->
+    <section class="screen-section" id="game-section">
+      <div class="section-header">
+        <span class="section-tag">STARLIGHT QUEST</span>
+        <h2 class="section-title">Collect Our Memories</h2>
+        <p class="section-sub">Guide our starlight across the night sky to gather 10 floating memory pieces.</p>
+      </div>
+
+      <div class="game-arena-wrapper">
+        <!-- Game HUD -->
+        <div class="game-hud">
+          <div class="hud-item hud-score">
+            <span class="hud-label">MEMORIES FOUND:</span>
+            <span class="hud-value" id="game-score">0 / 10</span>
+          </div>
+          <div class="hud-item hud-status" id="game-status-text">
+            Glide your cursor or finger to gather the floating sparks ✦
+          </div>
+          <button class="hud-btn" id="game-restart-btn">Restart Sky</button>
+        </div>
+
+        <!-- Floating Romantic Pop Quote Banner -->
+        <div class="game-quote-banner" id="game-quote-banner">
+          <span class="quote-text" id="game-quote-text">“You are my favorite notification.”</span>
+        </div>
+
+        <!-- Interactive Canvas Mini-Game -->
+        <div class="canvas-container" id="canvas-container">
+          <canvas id="game-canvas"></canvas>
+          <div class="game-instructions-overlay" id="game-instructions-overlay">
+            <div class="instruction-content">
+              <div class="instruct-icon">✨</div>
+              <h3>Catch The Golden Memories</h3>
+              <p>Move your mouse or drag your touch across the starry night. Collect all 10 precious symbols!</p>
+              <button class="cta-game-start-btn" id="game-start-btn">START COLLECTING</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Win Notification Dialog -->
+        <div class="game-win-modal" id="game-win-modal">
+          <div class="win-card">
+            <div class="win-sparkle">✦ ✦ ✦</div>
+            <h3 class="win-title">YOU FOUND THEM ALL!</h3>
+            <p class="win-desc">Every piece of our journey is safe in my heart.</p>
+            <button class="win-cta-btn" id="win-unlock-vault-btn">PLAY AGAIN ✦</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 6: SECRET MEMORY VAULT
+         ==================================================== -->
+    <section class="screen-section" id="secret-section">
+      <div class="section-header">
+        <span class="section-tag">LOCKED FOR YOU</span>
+        <h2 class="section-title">The Secret Memory</h2>
+        <p class="section-sub">A private letter written only for your eyes, sealed until the right moment.</p>
+      </div>
+
+      <div class="secret-vault-stage" id="secret-vault-stage">
+        
+        <!-- LOCKED STATE -->
+        <div class="vault-locked" id="vault-locked-state">
+          <div class="lock-orb">
+            <div class="lock-glow-ring"></div>
+            <div class="lock-icon" id="vault-lock-icon">🔒</div>
+          </div>
+          
+          <h3 class="vault-lock-title">This Page Is Waiting For You</h3>
+          <p class="vault-lock-msg">
+            Enter our secret passcode to unlock this page.
+          </p>
+
+          <div class="vault-passcode-box">
+            <label for="vault-passcode" class="sr-only">Secret Passcode</label>
+            <input type="password" id="vault-passcode" class="passcode-input" placeholder="Enter secret passcode...">
+            <button class="passcode-btn" id="vault-passcode-btn">UNLOCK</button>
+          </div>
+        </div>
+
+        <!-- UNLOCKED STATE -->
+        <div class="vault-unlocked" id="vault-unlocked-state" style="display: none;">
+          <div class="unlocked-burst-fx" id="unlocked-burst-fx"></div>
+
+          <div class="love-letter-container">
+            <div class="letter-wax-seal">❦</div>
+            
+            <div class="letter-header">
+              <span class="letter-date" id="secret-letter-date">September 18, 2026</span>
+              <h3 class="letter-recipient" id="secret-letter-recipient">To My Absolute Favorite Human In The Entire Universe,</h3>
+            </div>
+
+            <div class="secret-photo-polaroid">
+              <div class="secret-polaroid-frame">
+                <img src="" alt="Secret Memory Photo" id="secret-photo-img" class="secret-img">
+                <div class="secret-polaroid-caption" id="secret-photo-caption">
+                  “The exact second I knew I never wanted to let you go.”
+                </div>
+              </div>
+            </div>
+
+            <div class="letter-body" id="secret-letter-body">
+              <!-- Emotional letter injected from CONFIG -->
+            </div>
+
+            <div class="letter-promises-block">
+              <h4>Three Promises I Swear to Keep:</h4>
+              <div class="promises-grid">
+                <div class="promise-card">
+                  <span class="promise-num">I</span>
+                  <p>To always listen to you, even when you speak in quiet sighs, and to always hold your hand through every storm.</p>
+                </div>
+                <div class="promise-card">
+                  <span class="promise-num">II</span>
+                  <p>To never stop making you laugh, to bring you warm snacks when you're tired, and to kiss your forehead goodnight every single day.</p>
+                </div>
+                <div class="promise-card">
+                  <span class="promise-num">III</span>
+                  <p>To choose you, celebrate you, and love you more tomorrow than I do today.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="letter-signature">
+              <p class="sig-closing">Forever and ever yours,</p>
+              <p class="sig-name" id="secret-letter-author">Lucas ♡</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 7: HOW WELL DO YOU KNOW US? QUIZ
+         ==================================================== -->
+    <section class="screen-section" id="quiz-section">
+      <div class="section-header">
+        <span class="section-tag">PLAYFUL MEMORY CHECK</span>
+        <h2 class="section-title">How Well Do You Know Us?</h2>
+        <p class="section-sub">A lighthearted journey through the inside jokes, dates, and sweet habits we share.</p>
+      </div>
+
+      <div class="quiz-container" id="quiz-container">
+        
+        <!-- Quiz Progress Bar -->
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+        </div>
+
+        <div class="quiz-card" id="quiz-card">
+          <div class="quiz-counter-tag">
+            QUESTION <span id="quiz-current-idx">1</span> OF <span id="quiz-total-idx">6</span>
+          </div>
+
+          <h3 class="quiz-question" id="quiz-question-text">
+            Who confessed their feelings first?
+          </h3>
+
+          <div class="quiz-options-list" id="quiz-options-list">
+            <!-- Injected via JS -->
+          </div>
+
+          <div class="quiz-feedback-box" id="quiz-feedback-box">
+            <span class="feedback-icon" id="feedback-icon">❤️</span>
+            <span class="feedback-msg" id="feedback-msg">Spot on, my love!</span>
+          </div>
+        </div>
+
+        <!-- Quiz Final Results Card -->
+        <div class="quiz-result-card" id="quiz-result-card" style="display: none;">
+          <div class="result-crown">👑 ❦ 👑</div>
+          <h3 class="result-title">You Remembered <span id="quiz-score-num">6</span> of 6 Moments!</h3>
+          <p class="result-message" id="quiz-result-msg">
+            You know my heart better than anyone in this world. Every little detail of our story is etched in your smile.
+          </p>
+          <button class="quiz-replay-btn magnetic-btn" id="quiz-replay-btn">Play Again ✦</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================
+       LIGHTBOX MODAL FOR HIGH-RES PHOTO VIEW
+       ==================================================== -->
+  <div class="lightbox-modal" id="lightbox-modal" aria-hidden="true" role="dialog">
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close-btn" id="lightbox-close-btn" aria-label="Close photo preview">✕</button>
+      <div class="lightbox-img-wrapper">
+        <img src="" alt="Enlarged Memory Photo" id="lightbox-img" class="lightbox-img">
+      </div>
+      <div class="lightbox-details">
+        <h4 class="lightbox-title" id="lightbox-title">Memory Title</h4>
+        <p class="lightbox-date" id="lightbox-date">Date Stamp</p>
+        <p class="lightbox-caption" id="lightbox-caption">Caption</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================
+       LITTLE THINGS DETAILS MODAL
+       ==================================================== -->
+  <div class="detail-modal" id="detail-modal" aria-hidden="true" role="dialog">
+    <div class="detail-backdrop" id="detail-backdrop"></div>
+    <div class="detail-dialog">
+      <button class="detail-close-btn" id="detail-close-btn" aria-label="Close note">✕</button>
+      <div class="detail-card-inner">
+        <div class="detail-emoji" id="detail-emoji">✨</div>
+        <div class="detail-badge">A LITTLE THING I LOVE ABOUT YOU</div>
+        <h3 class="detail-title" id="detail-title">That cute glance</h3>
+        <div class="detail-divider"></div>
+        <p class="detail-text" id="detail-text">
+          Whenever you talk about something that excites you, your eyes widen and your entire face lights up. I fall for you all over again right then.
+        </p>
+        <div class="detail-footer">
+          <span>Remembered by Lucas</span>
+          <span class="detail-heart">♡</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Unified Main JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
